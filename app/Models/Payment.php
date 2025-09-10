@@ -11,18 +11,17 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'order_id' ,
-        'status' ,
-        'method' ,
-        'date_time' , 
-        'paid_at' , 
-        'amount'
+        'order_id',
+        'status',
+        'method',
+        'date_time',
+        'paid_at',
+        'amount',
     ];
-    
-    //Relations
+
+    // Relations
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
-
 }

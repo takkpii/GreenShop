@@ -16,10 +16,10 @@ class Shipment extends Model
         'status',
         'carrier',
         'shipped_at',
-        'delivered_at'
+        'delivered_at',
     ];
 
-    //Relations
+    // Relations
     public function order()
     {
         return $this->belongsTo(Order::class);

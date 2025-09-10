@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->dateTime('date_time');
-            $table->decimal('price',19,2);
+            $table->decimal('price', 19, 2);
             $table->string('status')->default('pending');
             $table->timestamps();
         });

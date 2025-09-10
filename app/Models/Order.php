@@ -11,13 +11,13 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id' , 
-        'status' ,
-        'date_time' ,
-        'price'
+        'user_id',
+        'status',
+        'date_time',
+        'price',
     ];
 
-    //Relations
+    // Relations
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -27,6 +27,7 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
     public function payment()
     {
         return $this->hasOne(Payment::class);
