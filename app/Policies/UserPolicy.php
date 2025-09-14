@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\User;
 use Filament\Panel;
-use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
@@ -64,12 +63,11 @@ class UserPolicy
         return false;
     }
 
-
     /**
      *  Determine whether the user can access to admin panel
      */
-    public function canAccessPanel(User $user , Panel $panel)
+    public function canAccessPanel(User $user, Panel $panel)
     {
-        return  $user->hasRole('admin');
+        return $user->hasRole('admin');
     }
 }

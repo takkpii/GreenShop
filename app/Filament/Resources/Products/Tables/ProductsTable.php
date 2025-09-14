@@ -3,10 +3,13 @@
 namespace App\Filament\Resources\Products\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class ProductsTable
@@ -15,19 +18,21 @@ class ProductsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->circular(),
                 TextColumn::make('name')
+                    ->sortable()
                     ->searchable(),
-                TextColumn::make('category_id')
-                    ->numeric()
+                TextColumn::make('category.name')
                     ->sortable(),
                 TextColumn::make('SKU')
                     ->searchable(),
-                ImageColumn::make('image'),
                 TextColumn::make('price')
                     ->money()
                     ->sortable(),
                 TextColumn::make('stock')
-                    ->numeric()
+                    ->numeric(decimalPlaces: 0)
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -39,10 +44,14 @@ class ProductsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('category')
+                    ->relationship('category', 'name')
+                    ->searchable(),
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
+                ViewAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

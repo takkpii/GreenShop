@@ -15,6 +15,8 @@ class CategoryForm
                 TextInput::make('name')
                     ->required(),
                 FileUpload::make('image')
+                    ->disk('public')
+                    ->directory('category')
                     ->image(),
             ]);
     }
